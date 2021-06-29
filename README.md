@@ -1,6 +1,8 @@
-# EducaFacilUi
+# Projeto Carros
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
+## Ci/Cd com Travis
+
+link tutorial: https://medium.com/the-andela-way/how-to-set-up-continuous-deployment-for-angular-using-travisci-and-heroku-7278f270c1fc
 
 ## Development server
 
