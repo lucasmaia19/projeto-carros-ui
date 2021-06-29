@@ -1,20 +1,21 @@
 language: node_js
 node_js:
-  - "12"
-sudo: false
-
+- '12'
+before_script:
+    - "export DISPLAY=:99.0"
+    - sleep 3 # give xvfb some time to start
+addons:
+    chrome: stable
+before_install:
+- npm install -g @angular/cli
+install: npm install
 branches:
   only:
   - master
-
-cache:
-  directories:
-    - node_modules
-
+after_script:
+- chmod +x publish-gh-pages.sh && ./publish-gh-pages.sh
 deploy:
   provider: heroku
-  skip_cleanup: true
-  keep-history: true
   api_key:
     secure: QbmIXPN9mWBRLEmd1w9fqoOdEAe/gB8MsZ3CqrYZbS/VlsxbPilaT2qP31nQd7qL72BbOnqFM5ZbeLhR9255E43QeynM9bYfZIq0YfJN6TJW425svfaH8OFL/bkfBDlvbG5CCxfIG6mbTsMqo3Ry7a6JDwDTEkiqxUnPXeq9H7DnHsQrOg0if3UWf2GhWM0jlj8pMJLOsB48byN5uNCExrzZkAtpr3elCCnfkM0vBs1Rffl63atqXuGJLebcdxYIZ6MYMYKJjJf5zwnbA24c12b62gJOzTmk5xYehYEVwol5Cx1MSHe6z2kTdzZasZ8HxX425wCFkgcoQE6XuQmvfZgZj35/GOfuF2HmjpFPT/pV6WNdyHK7kHBI4hOaV/zsn7sFbfEbsR5pSCEasmMv83IIZtSIaCX0QzFGZI0WlciSrb7D6NJtyMgoPDW5Hsy8bxuj5SK56DE0WGQe1PZnV4vJTGruQ6m1cAnYG5aHfypVnrBkVJ2Wm8LqseWaWpSEgvJfBN+noekRPZffblnkqjhVUs+Bbdhdf/KBMtI3e5QzhlQk1AcpBFwHSR5QCE0eCEAtLI11O0Yxl2dyZnCpbu2JsqHdmv/a3zEtGH+xBlgCH2El7kEUuggMYashY8a4Gc5dok+4oJOcS9U+TLIGx7IeePymk16AKBqbhMC4aak=
   app: "$APP"
