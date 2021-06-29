@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build --prod",
-    "test": "ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox",
+    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -49,6 +49,6 @@
   "devDependencies": {},
   "engines": {
     "node": "12.17.0",
-    "npm": "6.14.4"
+    "npm": "7.5.2"
   }
 }
