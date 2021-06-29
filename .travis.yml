@@ -1,13 +1,20 @@
 language: node_js
 node_js:
 - '12'
+before_script:
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
+    - sleep 3 # give xvfb some time to start
+addons:
+    chrome: stable
 before_install:
 - npm install -g @angular/cli
 install: npm install
 branches:
   only:
   - master
-
+after_script:
+- chmod +x publish-gh-pages.sh && ./publish-gh-pages.sh
 deploy:
   provider: heroku
   api_key:
