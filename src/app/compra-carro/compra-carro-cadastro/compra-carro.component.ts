@@ -31,10 +31,8 @@ export class CompraCarro {
 })
 export class AtividadeCadastroComponent implements OnInit {
 
-    // apiUploadUrl = 'https://educa-mais-api.herokuapp.com/atividade/upload-com-dados';
-    // apiuploadComDadosUrl = 'https://educa-mais-api.herokuapp.com/atividade/upload-com-dados';
-
-    apiUploadUrl = 'http://localhost:8080/compra-carro';
+    // apiUploadUrl = 'http://localhost:8080/compra-carro';
+    apiUploadUrl = 'https://lucar-car-api.herokuapp.com/compra-carro';
 
     compraCarro = new CompraCarro();
 
@@ -42,14 +40,9 @@ export class AtividadeCadastroComponent implements OnInit {
 
     carrosFi = new Carros();
 
-    // atividades: any;
-
     requestProgress = false;
 
     carrosList = new Array<Carros>();
-    // faixaEtariaList = new Array<MultSelecFe>();
-    // campoExperienciaList = new Array<MultSelecCe>();
-    // aprendizagemDesenvolvimento = new Array<MultSelecAd>();
 
     constructor(
         private http: HttpClient,
@@ -69,12 +62,8 @@ export class AtividadeCadastroComponent implements OnInit {
 
         if (idCarro) {
             this.carregarFormulario(idCarro);
-        } else {
-            this.compraCarro = { nome: 'Lucas', valor: 10.0  };
-          }
-
-            // this.editando();          
-        }
+        } 
+    }
         
    get editando() {
         return Boolean(this.compraCarro.id)
@@ -99,7 +88,6 @@ export class AtividadeCadastroComponent implements OnInit {
          carro.data = data.toDate();
     
         this.compraCarro = carro;
-        // this.compraCarro.carros = carro.carros.id
         })
       }
 
@@ -132,14 +120,15 @@ export class AtividadeCadastroComponent implements OnInit {
             }
         });
 
-        this.http.put(`http://localhost:8080/compra-carro/${idCarro}`, formData)
+        this.http.put(`https://lucar-car-api.herokuapp.com/compra-carro/${idCarro}`, formData)
           .toPromise()
           .then(response => {
             this.messageService.add({severity:'success', summary:'Cadastro Atualizado com Sucesso!'});
             this.router.navigate(['']);
           })
-          .catch(erro => this.messageService.add({severity:'error', summary: erro.error.message}))
-          // .catch(erro => console.log(erro.error.message))
+        //   .catch(erro => this.messageService.add({severity:'error', summary: erro.error.message}))
+          .catch(erro => this.messageService.add({severity:'error', summary: "Data Futura Invalida"}))
+          // .catch(erro => console.log(erro.error.message))Data Futura Invalida
           .finally(() => this.requestProgress = false);
       }
 
@@ -189,8 +178,8 @@ export class AtividadeCadastroComponent implements OnInit {
             this.messageService.add({severity:'success', summary:'Cadastro adicionado com sucesso!'});
             location.reload()
             })
-            .catch(erro => this.messageService.add({severity:'error', summary: erro.error.message}))
-            // .catch(erro => console.log(erro.error.message))
+            // .catch(erro => this.messageService.add({severity:'error', summary: erro.error.message}))
+            .catch(erro => this.messageService.add({severity:'error', summary: "Data Futura Invalida"}))
             .finally(() => this.requestProgress = false);
        }
 }
